@@ -1,14 +1,36 @@
-import { sign, SignOptions } from 'jsonwebtoken';
+import { SignOptions, sign, verify } from 'jsonwebtoken';
 import IUser from '../interface/userInterface';
+import HttpException from './httpException';
 
-const JWTSECRET = 'meusegredo';
+const SECRET = 'jwt_secret';
 
-const jwtConfig: SignOptions = {
-  expiresIn: '2d',
+const jwtDefaultConfig: SignOptions = {
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 
-const generateToken = (user: Omit< IUser, 'password'>):string =>
-  sign(user, JWTSECRET, jwtConfig);
+class TokenGenerator {
+  constructor(private jwtConfig?: SignOptions) {
+    if (!jwtConfig) {
+      this.jwtConfig = jwtDefaultConfig;
+    }
+  }
 
-export default generateToken;
+  public generateJWTToken(payload: Omit<IUser, 'password'>) {
+    return sign(payload, SECRET, this.jwtConfig);
+  }
+
+  public async authenticateToken(token: string) {
+    if (!token) {
+      throw new HttpException(401, 'Sem Token');
+    }
+    try {
+      const introspection = await verify(token, SECRET, this.jwtConfig);
+      return introspection;
+    } catch (e) {
+      throw new HttpException(401, 'token inválido');
+    }
+  }
+}
+
+export default TokenGenerator;
