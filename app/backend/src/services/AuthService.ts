@@ -17,11 +17,6 @@ class AuthService {
     if (!isValid) {
       throw new HttpException(401, 'Incorrect email or password');
     }
-    // const jwtHeader: Omit<IUser, 'password'> = {
-    //   username: user.getDataValue('username'),
-    //   role: user.getDataValue('role'),
-    //   email: user.getDataValue('email'),
-    // };
     const tokenGenerator = new TokenGenerator();
     const { username, role, email } = user;
     const token = tokenGenerator.generateJWTToken({ username, role, email });
