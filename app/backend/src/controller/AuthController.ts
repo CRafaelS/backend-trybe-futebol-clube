@@ -7,9 +7,9 @@ class AuthController {
     this.service = new AuthService();
   }
 
-  public auth(req: Request, res: Response) {
-    const token = this.service.authentication(req.body);
-    res.status(200).json(token);
+  public async auth(req: Request, res: Response) {
+    const token = await this.service.authentication(req.body);
+    return res.status(200).json(token);
   }
 }
 

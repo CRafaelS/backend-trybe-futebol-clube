@@ -36,6 +36,8 @@ Users.init(
   },
   {
     underscored: true,
+    modelName: 'users',
+    tableName: 'users',
     sequelize: db,
     timestamps: false,
   },

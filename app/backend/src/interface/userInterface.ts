@@ -4,7 +4,7 @@ export interface ILogin {
 }
 
 interface IUser extends ILogin {
-  id: number;
+  id?: number;
   username: string;
   role: string;
 }
