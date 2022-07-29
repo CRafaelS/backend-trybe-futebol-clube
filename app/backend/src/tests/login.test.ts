@@ -42,7 +42,7 @@ describe('Teste da rota Login', () => {
     }
     it('Teste da mensagem de retorno é "email is required"', async() => {
       routesResponse = await chai.request(app).post('/login').send(userMock[0]);
-      expect(routesResponse.body.mensagem).to.equal('email is required');
+      expect(routesResponse.body.mensagem).to.equal('All fields must be filled');
     });
   });
 
@@ -53,7 +53,7 @@ describe('Teste da rota Login', () => {
     })
     it('Teste da mensagem de retorno é "password is required"', async() => {
       routesResponse = await chai.request(app).post('/login').send(userMock[1]);
-      expect(routesResponse.body.mensagem).to.equal('password is required');
+      expect(routesResponse.body.mensagem).to.equal('All fields must be filled');
     });
   })
 
