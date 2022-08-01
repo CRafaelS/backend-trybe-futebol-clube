@@ -11,6 +11,12 @@ class TeamsController {
     const allTeams = await this.service.getAll();
     return res.status(200).json(allTeams);
   }
+
+  public async getOne(req: Request<{ id: number }>, res: Response) {
+    const { id } = req.params;
+    const allTeams = await this.service.getTeam(id);
+    return res.status(200).json(allTeams);
+  }
 }
 
 export default TeamsController;

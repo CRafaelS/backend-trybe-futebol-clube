@@ -20,4 +20,9 @@ routers.get(
   (req: Request, res: Response) => teamsController.getAll(req, res),
 );
 
+routers.get(
+  '/teams/:id',
+  (req: Request<{ id: number }>, res: Response) => teamsController.getOne(req, res),
+);
+
 export default routers;
