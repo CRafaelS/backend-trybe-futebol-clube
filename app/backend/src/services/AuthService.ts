@@ -13,7 +13,7 @@ class AuthService {
     if (!user) {
       throw new HttpException(401, 'Incorrect email or password');
     }
-    const isValid = await compare(login.password, user?.password as string);
+    const isValid = await compare(login.password, user.password as string);
     if (!isValid) {
       throw new HttpException(401, 'Incorrect email or password');
     }
