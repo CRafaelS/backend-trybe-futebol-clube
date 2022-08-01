@@ -1,6 +1,6 @@
 import { compare } from 'bcryptjs';
 import users from '../database/models/UserModels';
-import { ILogin } from '../interface/userInterface';
+import IUser, { ILogin } from '../interface/userInterface';
 import HttpException from '../utils/httpException';
 import TokenGenerator from '../utils/jwt';
 
@@ -21,6 +21,12 @@ class AuthService {
     const { username, role, email } = user;
     const token = tokenGenerator.generateJWTToken({ username, role, email });
     return { token };
+  };
+
+  public getRole = async (token: string): Promise<object> => {
+    const tokenGenerator = new TokenGenerator();
+    const { role } = await tokenGenerator.authenticateToken(token) as IUser;
+    return { role };
   };
 }
 export default AuthService;

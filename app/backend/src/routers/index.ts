@@ -16,6 +16,11 @@ routers.post(
 );
 
 routers.get(
+  '/login/validate',
+  (req: Request, res: Response) => authController.getRole(req, res),
+);
+
+routers.get(
   '/teams',
   (req: Request, res: Response) => teamsController.getAll(req, res),
 );
