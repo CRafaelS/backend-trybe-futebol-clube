@@ -3,6 +3,7 @@ import TeamsController from '../controller/TeamsController';
 import AuthController from '../controller/AuthController';
 import MatchController from '../controller/MachController';
 import emailValid, { passwordValid } from '../middleware/loginMiddleware';
+import tokenValid from '../middleware/tokenValidate';
 
 const routers: Router = Router();
 
@@ -34,6 +35,18 @@ routers.get(
 routers.get(
   '/matches',
   (req: Request, res: Response) => matchController.getAllMaches(req, res),
+);
+
+routers.post(
+  '/matches',
+  tokenValid,
+  (req: Request, res: Response) => matchController.createMach(req, res),
+);
+
+routers.patch(
+  '/matches/:id/finish',
+  tokenValid,
+  (req: Request, res: Response) => matchController.updateMach(req, res),
 );
 
 export default routers;
