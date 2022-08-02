@@ -28,7 +28,7 @@ class TokenGenerator {
       const introspection = await verify(token, SECRET, this.jwtConfig);
       return introspection;
     } catch (e) {
-      throw new HttpException(401, 'token inválido');
+      throw new HttpException(401, 'Token must be a valid token');
     }
   }
 }
