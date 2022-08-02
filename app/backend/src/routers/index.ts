@@ -49,4 +49,9 @@ routers.patch(
   (req: Request, res: Response) => matchController.updateMach(req, res),
 );
 
+routers.patch(
+  '/matches/:id',
+  (req: Request, res: Response) => matchController.updateResult(req, res),
+);
+
 export default routers;

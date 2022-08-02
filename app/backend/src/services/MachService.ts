@@ -1,7 +1,7 @@
+import IMatch from '../interface/machInterface';
+import Teams from '../database/models/TeamModels';
 import HttpException from '../utils/httpException';
 import Maches from '../database/models/MatchesModel';
-import Teams from '../database/models/TeamModels';
-import IMatch from '../interface/machInterface';
 
 class TeamsService {
   public getAllMaches = async ():Promise<IMatch[]> => {
@@ -51,6 +51,23 @@ class TeamsService {
       },
       { where: { id } },
     );
+  };
+
+  public updateResult = async ({ homeTeamGoals, awayTeamGoals }:{
+    homeTeamGoals: number;
+    awayTeamGoals: number;
+  }, id:string): Promise<object> => {
+    await Maches.update(
+      {
+        homeTeamGoals,
+        awayTeamGoals,
+      },
+      { where: { id } },
+    );
+    return {
+      homeTeamGoals,
+      awayTeamGoals,
+    };
   };
 }
 export default TeamsService;
