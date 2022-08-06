@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import TeamsController from '../controller/TeamsController';
 import AuthController from '../controller/AuthController';
 import MatchController from '../controller/MachController';
+import LeaderbordController from '../controller/LeaderbordController';
 import emailValid, { passwordValid } from '../middleware/loginMiddleware';
 import tokenValid from '../middleware/tokenValidate';
 
@@ -10,6 +11,8 @@ const routers: Router = Router();
 const authController = new AuthController();
 const teamsController = new TeamsController();
 const matchController = new MatchController();
+const leaderbordController = new LeaderbordController();
+
 routers.post(
   '/login',
   emailValid,
@@ -52,6 +55,11 @@ routers.patch(
 routers.patch(
   '/matches/:id',
   (req: Request, res: Response) => matchController.updateResult(req, res),
+);
+
+routers.get(
+  '/leaderboard/home',
+  (req: Request, res: Response) => leaderbordController.getAllLeaderbord(req, res),
 );
 
 export default routers;

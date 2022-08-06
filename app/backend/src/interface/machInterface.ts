@@ -1,3 +1,5 @@
+import Teams from '../database/models/TeamModels';
+
 export default interface IMatch {
   id?: number;
   homeTeam: number;
@@ -5,4 +7,8 @@ export default interface IMatch {
   awayTeam: number;
   awayTeamGoals: number;
   inProgress?: boolean;
+}
+
+export interface IMatchTeam extends IMatch {
+  teamHome: Teams[]
 }
